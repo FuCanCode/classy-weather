@@ -26,7 +26,7 @@ interface IAppState {
 const containerStyle = [
   "w-screen",
   "mx-9",
-  "py-6",
+  "py-12",
   "border-solid",
   "border-2",
   "border-black",
@@ -38,6 +38,7 @@ const containerStyle = [
   "outline",
   "outline-2",
   "outline-offset-4",
+  "md:max-w-[55%]",
 ].join(" ");
 
 class App extends React.Component<unknown, IAppState> {
@@ -120,6 +121,14 @@ class App extends React.Component<unknown, IAppState> {
               <SevenDays weather={this.state.weather as IWeather} />
             </>
           )}
+          <footer className="mt-8">
+            <small>
+              React Course Project by{" "}
+              <a className="text-blue-500" href="https://codingheroes.io/">
+                Jonas Schmedtmann
+              </a>
+            </small>
+          </footer>
         </div>
       </>
     );
