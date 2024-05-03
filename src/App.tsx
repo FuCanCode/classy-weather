@@ -26,7 +26,7 @@ interface IAppState {
 const containerStyle = [
   "w-screen",
   "mx-9",
-  "py-12",
+  "p-12",
   "border-solid",
   "border-2",
   "border-black",
@@ -38,7 +38,7 @@ const containerStyle = [
   "outline",
   "outline-2",
   "outline-offset-4",
-  "md:max-w-[55%]",
+  "lg:max-w-fit",
 ].join(" ");
 
 class App extends React.Component<unknown, IAppState> {

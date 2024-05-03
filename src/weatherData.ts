@@ -1,4 +1,4 @@
-function getWeatherIcon(wmoCode) {
+function getWeatherIcon(wmoCode: number) {
   const icons = new Map([
     [[0], "☀️"],
     [[1], "🌤️"],
@@ -17,17 +17,17 @@ function getWeatherIcon(wmoCode) {
   return icons.get(arr);
 }
 
-function formatDay(dateStr) {
+function formatDay(dateStr: string) {
   return new Intl.DateTimeFormat("en", {
     weekday: "short",
   }).format(new Date(dateStr));
 }
 
-function convertToFlag(countryCode) {
+function convertToFlag(countryCode: string) {
   const codePoints = countryCode
     .toUpperCase()
     .split("")
-    .map((char) => 127397 + char.charCodeAt());
+    .map((char: string) => 127397 + char.charCodeAt(0));
 
   return String.fromCodePoint(...codePoints);
 }
@@ -41,6 +41,7 @@ export async function getWeather(location: string) {
     if (!geoRes.ok) throw new Error("Error on fetching data!");
 
     const geoData = await geoRes.json();
+    console.log(geoData);
 
     if (!geoData.results) throw new Error("Place not found!");
 
@@ -51,6 +52,7 @@ export async function getWeather(location: string) {
       `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&daily=weathercode,temperature_2m_max,temperature_2m_min`
     );
     const weatherData = await weatherRes.json();
+
     const {
       temperature_2m_max: maxTemps,
       temperature_2m_min: minTemps,
@@ -58,8 +60,8 @@ export async function getWeather(location: string) {
       weathercode,
     } = weatherData.daily;
 
-    const icons = weathercode.map((c) => getWeatherIcon(c));
-    const weekdays = time.map((t) => formatDay(t));
+    const icons = weathercode.map((c: number) => getWeatherIcon(c));
+    const weekdays = time.map((t: string) => formatDay(t));
 
     return {
       flag: convertToFlag(country_code),
